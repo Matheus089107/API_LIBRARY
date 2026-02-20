@@ -37,5 +37,19 @@ public class UserService{
             throw new RuntimeException(e.getMessage());
         }
     }
+    public User UpdUser(User user, @PathVariable Long id){
+        try{
+            return dao.UpdUser(user, id);
+        } catch (SQLException | RuntimeException e ){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+    public void dltUser(Long id){
+        try{
+            dao.dltUser(id);
+        }catch (SQLException | RuntimeException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
 }

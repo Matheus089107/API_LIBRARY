@@ -25,13 +25,13 @@ public class UserController {
     public User listUserId(Long id){
         return service.listUserId(id);
     }
-    @PutMapping
-    public User updUser(){
-        return null;
+    @PutMapping("/{id}")
+    public User updUser(@RequestBody User user, @PathVariable Long id){
+        return service.UpdUser(user, id);
     }
-    @DeleteMapping
-    public User dltUser(){
-        return null;
+    @DeleteMapping("/{id}")
+    public void dltUser(@PathVariable Long id){
+        service.dltUser(id);
     }
 
 }

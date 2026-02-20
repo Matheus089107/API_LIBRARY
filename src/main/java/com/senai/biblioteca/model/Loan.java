@@ -9,7 +9,9 @@ public class Loan {
     private Date loanDate;
     private Date returnDate;
 
-    public Loan(long id, long userId, long bookId, Date loanDate, Date returnDate) {
+    public Loan(){}
+
+    public Loan(long id, long bookId, long userId, Date loanDate, Date returnDate) {
         this.id = id;
         this.userId = userId;
         this.bookId = bookId;

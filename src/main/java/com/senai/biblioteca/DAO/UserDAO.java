@@ -58,5 +58,44 @@ public class UserDAO {
         }
         return null;
     }
+    public User UpdUser (User user, Long id) throws SQLException{
+        String query = "update usuario set nome = ?, email = ? where id = ?";
+
+        try(Connection conn = DataBase.connect();
+        var stmt = conn.prepareStatement(query)){
+
+            stmt.setString(1, user.getNome());
+            stmt.setString(2, user.getEmail());
+            stmt.setLong(3, id);
+            stmt.executeUpdate();
+        }
+        user.setId(id);
+        return user;
+    }
+    public void dltUser (Long id) throws SQLException{
+        String query = "delete from usuario where id = ?";
+
+        try(Connection conn = DataBase.connect();
+        var stmt = conn.prepareStatement(query)){
+
+            stmt.setLong(1 ,id);
+            stmt.executeUpdate();
+
+        }
+    }
+    public boolean userExists(Long id) throws SQLException{
+        String query = "select id, nome, email from usuario where id = ?";
+        try(Connection conn = DataBase.connect();
+            var stmt = conn.prepareStatement(query)){
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

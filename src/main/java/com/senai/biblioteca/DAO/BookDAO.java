@@ -27,8 +27,8 @@ public class BookDAO {
             if(rs.next()){
                 book.setId(rs.getLong(1));
             }
+            return book;
         }
-        return book;
     }
     public List<Book> getAllBooks() throws SQLException{
         String query = "SELECT id, titulo, autor, ano_publicacao from livro";
@@ -84,5 +84,18 @@ public class BookDAO {
             stmt.executeUpdate();
         }
     }
+    public boolean bookExists(Long id) throws SQLException{
+        String query = "select id, titulo,autor,ano_publicacao from livro where id = ?";
+         try(Connection conn = DataBase.connect();
+         var stmt = conn.prepareStatement(query)){
+             stmt.setLong(1, id);
 
+             ResultSet rs = stmt.executeQuery();
+
+             if(rs.next()){
+                 return true;
+             }
+         }
+        return false;
+    }
 }
