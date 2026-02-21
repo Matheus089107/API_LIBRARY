@@ -1,5 +1,7 @@
 package com.senai.biblioteca.controller;
 
+import com.senai.biblioteca.dto.requisicao.UserResquisition;
+import com.senai.biblioteca.dto.respostas.UserResponse;
 import com.senai.biblioteca.model.User;
 import com.senai.biblioteca.service.BookService;
 import com.senai.biblioteca.service.UserService;
@@ -14,19 +16,19 @@ public class UserController {
     UserService service;
     public UserController(UserService service){this.service = service;}
     @PostMapping
-    public User signUser(@RequestBody User user) {
+    public UserResponse signUser(@RequestBody UserResquisition user) {
         return service.signUser(user);
     }
     @GetMapping
-    public List<User> listUser(){
+    public List<UserResponse> listUser(){
         return service.listUser();
     }
     @GetMapping("/{id}")
-    public User listUserId(Long id){
+    public UserResponse listUserId(Long id){
         return service.listUserId(id);
     }
     @PutMapping("/{id}")
-    public User updUser(@RequestBody User user, @PathVariable Long id){
+    public UserResponse updUser(@RequestBody UserResquisition user, @PathVariable Long id){
         return service.UpdUser(user, id);
     }
     @DeleteMapping("/{id}")

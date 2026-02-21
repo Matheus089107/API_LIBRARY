@@ -1,5 +1,7 @@
 package com.senai.biblioteca.controller;
 
+import com.senai.biblioteca.dto.requisicao.LoanRequisition;
+import com.senai.biblioteca.dto.respostas.LoanResponse;
 import com.senai.biblioteca.model.Loan;
 import com.senai.biblioteca.service.LoanService;
 import org.springframework.web.bind.annotation.*;
@@ -16,28 +18,32 @@ public class LoanController {
     }
 
     @PostMapping
-    public Loan signLoan(@RequestBody Loan loan){
+    public LoanResponse signLoan(@RequestBody LoanRequisition loan) {
         return service.SignLoan(loan);
     }
+
     @PutMapping
-    public Loan UpdLoan(@RequestBody Loan loan, @PathVariable Long id){
+    public LoanResponse UpdLoan(@RequestBody LoanRequisition loan, @PathVariable Long id) {
         return service.updLoan(loan, id);
     }
+
     @GetMapping
-    public List<Loan> listLoan(){
-    return service.listLoan();
+    public List<LoanResponse> listLoan() {
+        return service.listLoan();
     }
+
     @GetMapping("/{id}")
-    public Loan listLoanId(@PathVariable Long id){
+    public LoanResponse listLoanId(@PathVariable Long id) {
         return service.listLoanId(id);
     }
+
     @PutMapping("/{id}")
-    public Loan returnBook(){
+    public Loan returnBook() {
         return null;
     }
 
     @DeleteMapping("/{id}")
-    public void dltLoan(@PathVariable Long id){
+    public void dltLoan(@PathVariable Long id) {
         service.dltLoan(id);
     }
 }
